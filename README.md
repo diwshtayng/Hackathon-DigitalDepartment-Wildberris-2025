@@ -17,8 +17,8 @@ cd our-flask-app
 
 ### 2. Соберите и запустите контейнер
 ```bash
-docker build -t my-flask-app .
-docker run -dp 5002:5002 my-flask-app
+docker build -t our--flask-app .
+docker run -dp 5002:5002 our-flask-app
 ```
 
 ### 3. Откройте в браузере
