@@ -12,7 +12,6 @@
 ### 1. Клонируйте репозиторий
 ```bash
 git clone https://github.com/diwshtayng/Hackathon-DigitalDepartment-Wildberris-2025.git
-cd Hackathon-DigitalDepartment-Wildberris-2025/our-flask-app
 ```
 
 ### 2. Соберите и запустите контейнер
