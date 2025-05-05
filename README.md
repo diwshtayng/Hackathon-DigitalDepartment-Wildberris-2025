@@ -17,7 +17,7 @@ cd Hackathon-DigitalDepartment-Wildberris-2025/our-flask-app
 
 ### 2. Соберите и запустите контейнер
 ```bash
-docker build -t our--flask-app .
+docker build -t our-flask-app .
 docker run -dp 5002:5002 our-flask-app
 ```
 
