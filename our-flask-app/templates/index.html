@@ -7,7 +7,8 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #8e2de2, #4a00e0); /* фиолетовый фон */
+      background: url("{{ url_for('static', filename='wb_back.jpeg') }}") no-repeat center center fixed;
+      background-size: cover;
       color: white;
     }
 
@@ -25,7 +26,7 @@
     .bmstu-logo {
       height: 50px !important; /* Увеличили высоту */
       margin-top: 10px; /* Настроили вертикальное положение */
-      margin-left: 15px; /* Добавили отступ слева */
+      margin-left: 13px; /* Добавили отступ слева */
     }
 
     .container {
