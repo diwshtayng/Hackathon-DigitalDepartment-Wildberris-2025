@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Предсказание мошенничества</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #8e2de2, #4a00e0); /* фиолетовый фон */
+      color: white;
+    }
+
+    .navbar {
+      background-color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar img {
+      height: 40px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      color: black;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <img src="{{ url_for('static', filename='wildberries_image.png') }}" alt="WB Logo">
+  </div>
+
+  <div class="container">
+    <h2>Проверка на мошенничество</h2>
+    <form id="predictForm">
+      <input type="number" name="amount" placeholder="Сумма транзакции" required>
+      <input type="text" name="location" placeholder="Локация" required>
+      <button type="submit">Проверить</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('predictForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value });
+
+      const response = await fetch('/predict', {  // локальный запрос
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+      document.getElementById('result').innerText =
+        `Результат: ${result.isFraud ? 'Мошенничество' : 'Не мошенничество'} 
+        (Вероятность: ${Math.round(result.probability * 100)}%)`;
+    });
+  </script>
+</body>
+</html>
