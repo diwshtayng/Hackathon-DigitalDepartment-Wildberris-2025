@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Предсказание мошенничества</title>
+  <title>Проверка транзакций</title>
   <style>
     body {
       margin: 0;
@@ -22,11 +22,11 @@
     .navbar img {
       height: 40px;
     }
-    
+
     .bmstu-logo {
-      height: 50px !important; /* Увеличили высоту */
-      margin-top: 10px; /* Настроили вертикальное положение */
-      margin-left: 13px; /* Добавили отступ слева */
+      height: 50px;
+      margin-top: 10px;
+      margin-left: 13px;
     }
 
     .container {
@@ -39,10 +39,10 @@
       color: black;
     }
 
-    input, button {
+    input[type="file"], button {
       width: 100%;
       padding: 12px;
-      margin: 8px 0;
+      margin: 12px 0;
     }
 
     #result {
@@ -56,15 +56,14 @@
 
   <div class="navbar">
     <img src="{{ url_for('static', filename='wildberries_image.png') }}" alt="WB Logo">
-    </div>
     <img class="bmstu-logo" src="{{ url_for('static', filename='bmstu_ck_image.png') }}" alt="BMSTU Logo">
   </div>
 
   <div class="container">
-    <h2>Проверка на мошенничество</h2>
-    <form id="predictForm">
-      <input type="number" name="amount" placeholder="Сумма транзакции" required>
-      <input type="text" name="location" placeholder="Локация" required>
+    <h2>Проверка транзакций на мошенничество</h2>
+    <form id="predictForm" enctype="multipart/form-data">
+      <label>Загрузите CSV-файл с транзакциями:</label>
+      <input type="file" name="file" accept=".csv" required>
       <button type="submit">Проверить</button>
     </form>
     <div id="result"></div>
@@ -75,19 +74,20 @@
       event.preventDefault();
 
       const formData = new FormData(this);
-      const data = {};
-      formData.forEach((value, key) => { data[key] = value });
 
-      const response = await fetch('/predict', {  // локальный запрос
+      const response = await fetch('/predict_file', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: formData
       });
+
+      if (!response.ok) {
+        document.getElementById('result').innerText = "Ошибка при обработке файла";
+        return;
+      }
 
       const result = await response.json();
       document.getElementById('result').innerText =
-        `Результат: ${result.isFraud ? 'Мошенничество' : 'Не мошенничество'} 
-        (Вероятность: ${Math.round(result.probability * 100)}%)`;
+        `Обнаружено мошеннических транзакций: ${result.fraud_count} из ${result.total}`;
     });
   </script>
 </body>
