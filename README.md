@@ -11,7 +11,7 @@
 
 ### 1. Клонируйте репозиторий
 ```bash
-git clone https://github.com/diwshtayng/Hackathon-DigitalDepartment-Wildberris-2025.git
+git clone https://github.com/diwshtayng/Hackathon-DigitalDepartment-Wildberris-2025/our-flask-app.git
 cd our-flask-app
 ```
 
