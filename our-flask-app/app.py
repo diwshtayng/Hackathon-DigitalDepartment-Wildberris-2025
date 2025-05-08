@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, jsonify
+from preprocessor import preprocess
 import pandas as pd
 import pickle
 import os
 import sklearn
 
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "model.pkl")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "catboost_model.pkl")
 
 try:
     with open(MODEL_PATH, "rb") as f:
@@ -32,18 +33,18 @@ def predict_file():
     try:
         # Читаем CSV-файл в DataFrame
         df = pd.read_csv(file)
+        df = preprocess(df)
 
         # При необходимости — вызвать трансформации:
         # df = preprocess(df)  ← если ты используешь свой preprocessor.py
 
         # Предсказание
-        predictions = model.predict(df)
-        fraud_count = int((predictions == 1).sum())
-        total = len(df)
+        prediction = model.predict(df)
+        probability = model.predict_proba(df)[:, 1]
 
         return jsonify({
-            "fraud_count": fraud_count,
-            "total": total
+            "prediction": prediction,
+            "probability": probability
         })
     
     except Exception as e:
