@@ -88,7 +88,7 @@
 
       const result = await response.json();
       document.getElementById('result').innerText =
-        `Обнаружено мошеннических транзакций: ${result.fraud_count} из ${result.total}`;
+        `Транзация мошенническая: ${result.prediction}, вероятность ${result.probability}`;
     });
   </script>
 </body>

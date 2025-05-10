@@ -5,10 +5,10 @@ import pickle
 import os
 import sklearn
 
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "catboost_model.pkl")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "catboost_correct.pkl")
 
 try:
-    with open(MODEL_PATH, "rb") as f:
+    with open('/Users/sergegribo/Desktop/ML/git_hackaton/Hackathon-DigitalDepartment-Wildberris-2025/our-flask-app/catboost_correct.pkl', "rb") as f:
         model = pickle.load(f)
 except Exception as e:
     print(f"Ошибка при загрузке модели: {e}")
@@ -29,16 +29,17 @@ def predict_file():
         return jsonify({"error": "Файл не передан"}), 400
 
     file = request.files["file"]
-    
     try:
-        # Читаем CSV-файл в DataFrame
         df = pd.read_csv(file)
-        df = preprocess(df)
+        df['CreatedDate'] = pd.to_datetime(df['CreatedDate'])
+        df['order_hour'] = df['CreatedDate'].dt.hour
+        df.drop('CreatedDate', axis=1, inplace=True)
+        df.drop(columns=['nm_id', 'user_id'], inplace=True)
+        
+    except Exception as e:
+        return jsonify({"error": f"Ошибка обработки файла: {str(e)}"}), 500
 
-        # При необходимости — вызвать трансформации:
-        # df = preprocess(df)  ← если ты используешь свой preprocessor.py
-
-        # Предсказание
+    try:
         prediction = model.predict(df)
         probability = model.predict_proba(df)[:, 1]
 
@@ -47,8 +48,8 @@ def predict_file():
             "probability": probability
         })
     
-    except Exception as e:
-        return jsonify({"error": f"Ошибка обработки файла: {str(e)}"}), 500
+    except Exception as er:
+        return jsonify({"error": f"Ошибка в работе модели: {str(er)}"}), 500
 
 
 if __name__ == '__main__':
