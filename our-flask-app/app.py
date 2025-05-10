@@ -1,30 +1,28 @@
 from flask import Flask, render_template, request, jsonify
-from preprocessor import preprocess
+from preprocessor import preprocess  
 import pandas as pd
 import pickle
 import os
-import sklearn
 
+# Получаем путь к модели, находящейся в той же директории, что и app.py
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "catboost_correct.pkl")
 
+# Пытаемся загрузить модель
 try:
-    with open('/Users/sergegribo/Desktop/ML/git_hackaton/Hackathon-DigitalDepartment-Wildberris-2025/our-flask-app/catboost_correct.pkl', "rb") as f:
+    with open(MODEL_PATH, "rb") as f:
         model = pickle.load(f)
 except Exception as e:
     print(f"Ошибка при загрузке модели: {e}")
     model = None
 
-
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
-
+    return render_template("index.html")  
 
 @app.route("/predict_file", methods=["POST"])
 def predict_file():
-    # Проверка: есть ли файл
     if "file" not in request.files:
         return jsonify({"error": "Файл не передан"}), 400
 
@@ -44,14 +42,12 @@ def predict_file():
         probability = model.predict_proba(df)[:, 1]
 
         return jsonify({
-            "prediction": prediction,
-            "probability": probability
+            "prediction": prediction.tolist(),  # Преобразуем NumPy в JSON-совместимый формат
+            "probability": probability.tolist()
         })
     
     except Exception as er:
         return jsonify({"error": f"Ошибка в работе модели: {str(er)}"}), 500
 
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5002)
-
