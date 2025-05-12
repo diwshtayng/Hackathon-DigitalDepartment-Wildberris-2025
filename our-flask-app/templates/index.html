@@ -112,7 +112,25 @@
             <tr><td>mean_percent_of_ordered_items</td><td><input type="number" step="any" name="mean_percent_of_ordered_items" required></td></tr>
           </tbody>
         </table>
-        <button type="submit" style="border-radius: 12px; box-shadow: none;">Отправить</button>
+                <button type="submit" 
+        style="
+          border-radius: 16px;
+          background: linear-gradient(to right, #fd3ae1, #3a3ffd);
+          color: white;
+          font-weight: bold;
+          font-size: 16px;
+          padding: 14px 24px;
+          border: none;
+          cursor: pointer;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+          transition: all 0.3s ease;
+        "
+        onmouseover="this.style.background='linear-gradient(to right, #d92dd7, #2e35f0)'"
+        onmouseout="this.style.background='linear-gradient(to right, #fd3ae1, #3a3ffd)'"
+      >
+        Отправить
+      </button>
+      </form>
       </form>
 
       <div id="errorDiv"></div>
