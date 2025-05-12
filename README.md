@@ -47,7 +47,7 @@ Hackathon-DigitalDepartment-Wildberris-2025/
 │   ├── preprocessor.py       # Скрипт для предобработки входных данных перед предсказанием
 │   ├── Dockerfile            # Инструкция для сборки Docker-образа приложения
 │   ├── static/               # Место для CSS, JS, изображений, иконок и др.
-|   ├── requirements.txt      # Список зависимостей Python (Flask, pandas, scikit-learn и др.)
+│   ├── requirements.txt      # Список зависимостей Python (Flask, pandas, scikit-learn и др.)
 │   └── templates/            # Место для HTML-шаблон формы ввода данных и отображения результата
 ├── final_notebook.ipynb      #Jupyter-ноутбук с EDA, preprocessing и обучением моделей
 └── README.md                 # Документация к проекту: описание, как запускать, использовать и т.д.
