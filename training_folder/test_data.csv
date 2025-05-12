@@ -1,2 +1,0 @@
-user_id,nm_id,CreatedDate,service,total_ordered,PaymentType,IsPaid,count_items,unique_items,avg_unique_purchase,is_courier,NmAge,Distance,DaysAfterRegistration,number_of_orders,number_of_ordered_items,mean_number_of_ordered_items,min_number_of_ordered_items,max_number_of_ordered_items,mean_percent_of_ordered_items
-1,1,2025-01-05 02:20:24+03:00,nnsz,627,CSH,False,4,4,1.0,0,117,3443,73,1,627,627.0,627,627,100.0
