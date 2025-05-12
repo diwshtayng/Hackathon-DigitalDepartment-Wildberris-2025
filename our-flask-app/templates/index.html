@@ -192,7 +192,7 @@
             row.innerHTML = `
               <td>${index + 1}</td>
               <td>${prediction}</td>
-              <td>${data.probability[index]}</td>
+              <td>${parseFloat(data.probability[index]).toFixed(4)}</td>
             `;
             resultTableBody.appendChild(row);
           });
