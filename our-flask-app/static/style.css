@@ -10,7 +10,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: #bfbfbf;
   background-size: cover;
   overflow-y: scroll;
   flex-direction: column;
@@ -94,7 +93,6 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color:  #bfbfbf;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -120,6 +118,7 @@ h1 {
   margin-top: calc(60/1080 * 100vh);
   display: flex;
   justify-content: center;
+  gap: calc(20/1920 * 100vw); 
   width: 100%;
   font-weight: bold;
   color: black;
@@ -130,16 +129,17 @@ h1 {
   width: calc(320/1920 * 100vw);
   height: calc(80/1080 * 100vh);
   justify-content: center;
-  background-color: #ddd;
+  background-color: #6c5ce7;
   font-weight: bold;
   color: black;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+  border-radius: 12px;
 }
 
 .switch-btn.active {
-  background-color: #bfbfbf;
+  background-color: #4a00e0;
 }
 
 input[type="file"], button {
@@ -161,7 +161,7 @@ input[type="file"], button {
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  background-color: #fedbf9;
+  background-color: #c2baff;
   border: 2px dashed #939393;
   height: calc(480/1080 * 100vh);
   width: calc(640/1920 * 100vw);
@@ -253,6 +253,7 @@ input[type="file"], button {
   cursor: pointer;
   background-color: #d9d9d9;
   transition: background-color 0.3s;
+  transition: background 0.3s ease;
 }
 
 .backButton img {
@@ -265,6 +266,7 @@ input[type="file"], button {
 
 .backButton.active {
   background-color: #a1a1a1;
+  transition: background 0.3s ease;
 }
 
 .exportButton {
@@ -344,4 +346,18 @@ input[type=number]::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield; /* Firefox */
   appearance: textfield;
+}
+
+#manualForm {
+  margin-top: 30px;
+}
+
+table td input,
+table td select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 14px;
 }
