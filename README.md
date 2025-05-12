@@ -26,13 +26,13 @@
 ### 1. Клонируйте репозиторий
 ```bash
 git clone https://github.com/diwshtayng/Hackathon-DigitalDepartment-Wildberris-2025.git
-cd Hackathon-DigitalDepartment-Wildberris-2025/app
+cd Hackathon-DigitalDepartment-Wildberris-2025/our-flask-app
 ```
 
 ### 2. Соберите и запустите контейнер
 ```bash
-docker build -t app .
-docker run -dp 5002:5002 app
+docker build -t our-flask-app .
+docker run -dp 5002:5002 our-flask-app
 ```
 
 ### 3. Откройте в браузере
@@ -41,7 +41,7 @@ docker run -dp 5002:5002 app
 ## Структура проекта
 ```
 Hackathon-DigitalDepartment-Wildberris-2025/
-├── app/
+├── our-flask-app/
 │   ├── app.py                # Основной файл с Flask-приложением и маршрутами
 │   ├── catboost_correct.pkl  # Сериализованная обученная модель
 │   ├── preprocessor.py       # Скрипт для предобработки входных данных перед предсказанием
