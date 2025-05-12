@@ -116,6 +116,7 @@ h1 {
 
 .form-switch {
   margin-top: calc(60/1080 * 100vh);
+  margin-bottom: calc(40/1080 * 100vh);
   display: flex;
   justify-content: center;
   gap: calc(20/1920 * 100vw); 
@@ -313,51 +314,75 @@ input[type="file"], button {
 
 table {
   width: 100%;
-  border-collapse: collapse;
+  max-width: 800px;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 16px;
+  overflow: hidden;
   table-layout: fixed;
-  align-items: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
 }
 
-th, td, tr {
-  border: 1px solid #000000;
-  padding: 8px;
-  font-size: 10px;
-}
-
+/* Заголовки */
 th {
-  background-color: #d9d9d9;
+  background-color: #e6e6e6;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  padding: 12px 16px;
+  text-align: left;
 }
 
-tbody tr:nth-child(odd) {
-  background-color: #ffffff; /* Белый */
+/* Обычные ячейки */
+td {
+  background-color: #fff;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: middle;
+  word-wrap: break-word;
 }
 
-tbody tr:nth-child(even) {
-  background-color: #f2f2f2; /* Светло-серый */
+/* Чередование фона строк */
+tbody tr:nth-child(even) td {
+  background-color: #f9f9f9;
 }
 
-/* Убираем спиннеры (стрелочки) в разных браузерах */
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+/* Скругления углов */
+thead tr:first-child th:first-child {
+  border-top-left-radius: 16px;
 }
 
-input[type=number] {
-  -moz-appearance: textfield; /* Firefox */
-  appearance: textfield;
+thead tr:first-child th:last-child {
+  border-top-right-radius: 16px;
 }
 
-#manualForm {
-  margin-top: 30px;
+tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 16px;
 }
 
-table td input,
-table td select {
+tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 16px;
+}
+
+/* Вводимые элементы */
+table input,
+table select {
   width: 100%;
   box-sizing: border-box;
-  padding: 10px;
-  border-radius: 12px;
+  padding: 8px 12px;
   border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
   font-size: 14px;
+}
+
+table input:focus,
+table select:focus {
+  outline: none;
+  border-color: #8e2de2;
+  box-shadow: 0 0 4px rgba(142, 45, 226, 0.4);
 }
