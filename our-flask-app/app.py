@@ -89,7 +89,6 @@ def predict_file():
     except Exception as e:
         return jsonify({"error": f"Ошибка обработки файла: {str(e)}"}), 500
 
-
 @app.route("/predict_form", methods=["POST"])
 def predict_form():
     try:
@@ -121,6 +120,10 @@ def predict_form():
         prediction = model.predict(df)
         probability = model.predict_proba(df)[:, 1]
 
+        # ✅ Сохраняем в сессию
+        session['predictions'] = prediction.tolist()
+        session['probabilities'] = probability.tolist()
+
         return jsonify({
             "prediction": prediction.tolist(),
             "probability": probability.tolist()
@@ -128,7 +131,6 @@ def predict_form():
 
     except Exception as e:
         return jsonify({"error": f"Ошибка обработки формы: {str(e)}"}), 500
-
-
+    
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5002, debug=True)
